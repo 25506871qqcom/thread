@@ -2,10 +2,13 @@ package lock;
 
 import java.util.Date;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Unsafe {
 
     private static  int num = 0 ;
+    private static ReentrantLock  lock = new ReentrantLock();
+//    private static MyLock  lock = new MyLock();
 
     private static  CountDownLatch countDownLatch = new CountDownLatch(10);
     public static void main(String[] args) throws InterruptedException {
@@ -39,8 +42,17 @@ public class Unsafe {
 
     }
 
-    private static synchronized  void add() throws InterruptedException {
+    private static synchronized  void add_sync() throws InterruptedException {
         Thread.sleep(10);
         num++;
     }
+
+    private static   void add() throws InterruptedException {
+
+        lock.lock();
+
+        num++;
+        lock.unlock();
+    }
+
 }
