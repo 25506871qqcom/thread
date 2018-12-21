@@ -1,6 +1,6 @@
 package lock;
 
-public class Lock {
+public class LockDemo {
     private static Object HALT_A = new Object();
     private static Object HALT_B = new Object();
 
