@@ -20,10 +20,10 @@ public class ThreadpoolDemo {
         CopyOnWriteArrayList<String> times = new CopyOnWriteArrayList<>() ;
         //任务数 x  大于 最大与 队列的，就不会干了？不会做完？ 50>20 + 20 = 10 个不做
         int x = 50 ; //40-23 = 17
-        LinkedBlockingQueue<Runnable> blockingQueue = new LinkedBlockingQueue<>(nworks);
+        LinkedBlockingQueue<Runnable> blockingQueue = new LinkedBlockingQueue<>(10);
         ThreadPoolExecutor threadPoolExecutor
                 = new ThreadPoolExecutor(csize,msize,3, TimeUnit.SECONDS,blockingQueue
-                ,new ThreadPoolExecutor.DiscardOldestPolicy()
+                ,new ThreadPoolExecutor.CallerRunsPolicy()
         );
 
         threadPoolExecutor.prestartAllCoreThreads();
